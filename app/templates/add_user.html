@@ -2,13 +2,19 @@
 {% block head %}
 	<script type="text/javascript" src="/static/js/add_user.js"></script>
 {% endblock %}
+
 {% block content %}
-	<h1>Add A User</h1>
+	<div class="container add-user">
+		<h1>Add A User</h1>
 
-	<label for="username">Username</label>
-	<input type="text" name="username">
-	<label for="email">Email</label>
-	<input type="email" name="email">
-	<button id="submit-user">Submit</button>
-
+		<div class="form-block">
+			<label for="username">Username</label>
+			<input type="text" name="username">
+		</div>
+		<div class="form-block">
+			<label for="email">Email</label>
+			<input type="email" name="email">
+		</div>
+		<button id="submit-user" class="btn btn-default">Submit</button>
+	</div>
 {% endblock %}
