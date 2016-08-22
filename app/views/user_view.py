@@ -9,3 +9,10 @@ from app import app
 def user():
     return flask.render_template('user.html',
                                  user=flask.g.user)
+
+
+@app.route('/user/add', methods=['GET'])
+@login_required
+def add_user():
+    return flask.render_template('add_user.html',
+                                 user=flask.g.user)
