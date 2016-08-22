@@ -1,47 +1,33 @@
 import flask
-from flask import g
-from flask import redirect
-from flask import render_template
-from flask import url_for
-from flask_login import current_user, logout_user
+from flask_login import current_user, login_user
 
-from app import app, oid
-from app.forms import LoginForm
+from app import app, oid, db, lm
+from app.models import User
+import load_views
 
+
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+@oid.after_login
+def after_login(resp):
+    if resp.email is None or resp.email == "":
+        flask.flash('Invalid login. Please try again.')
+        return flask.redirect(flask.url_for('login'))
+    user = User.query.filter_by(email=resp.email).first()
+    if user is None:
+        user = User(name=resp.nickname or resp.email.split('@')[0], email=resp.email)
+        db.session.add(user)
+        db.session.commit()
+    remember_me = False
+    if 'remember_me' in flask.session:
+        remember_me = flask.session['remember_me']
+        flask.session.pop('remember_me', None)
+    login_user(user, remember=remember_me)
+    return flask.redirect(flask.url_for('index'))
 
 @app.before_request
 def before_request():
-    g.user = current_user
-
-
-@app.route('/')
-@app.route('/index')
-def index():
-    user = g.user
-    return render_template('index.html',
-                           title='Home',
-                           user=user)
-
-
-@app.route('/login', methods=['GET', 'POST'])
-@oid.loginhandler
-def login():
-    if g.user is not None and g.user.is_authenticated:
-        return redirect(url_for('index'))
-    form = LoginForm()
-    if form.validate_on_submit():
-        flask.session['remember_me'] = form.remember_me.data
-        return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
-    return render_template('login.html',
-                           title='Sign In',
-                           form=form,
-                           providers=app.config['OPENID_PROVIDERS'])
-
-
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
-
-# rearch to move this at some point
-import app.handlers.auth_handler  # needs to be at bottom
+    flask.g.user = current_user

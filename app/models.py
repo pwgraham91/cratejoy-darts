@@ -26,7 +26,9 @@ class User(db.Model):
 
 class Tournament(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date_started = db.Column(db.DateTime, default=sqlalchemy.func.now())
+    # date_started = db.Column(db.DateTime, default=sqlalchemy.func.now())  TODO figure out the now
+    date_started = db.Column(db.DateTime, nullable=False)
+    random_draw = db.Column(db.Boolean, default=False, nullable=False)
 
 
 class Game(db.Model):
