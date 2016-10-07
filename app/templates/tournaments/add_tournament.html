@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block head %}
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+	<script type="text/javascript" src="/static/js/add_tournament.js"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="container add-tournament">
+		<h1>Add Tournament</h1>
+
+		<div class="form-block">
+			<label for="date-started">Date Started</label>
+			<input type="text" id="date-started">
+		</div>
+		<div class="form-block">
+			<label for="random">Random Draw</label>
+			<select name="random">
+				<option value="false">False</option>
+				<option value="true">True</option>
+			</select>
+		</div>
+		<button id="submit-tournament" class="btn btn-default">Submit Tournament</button>
+	</div>
+{% endblock %}

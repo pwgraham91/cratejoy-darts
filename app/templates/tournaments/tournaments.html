@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+	<h1>Tournaments</h1>
+	<a href="/tournaments/add">Add Tournament</a>
+	<h2>Existing Tournaments</h2>
+	{% for tournament in tournaments %}
+		<a href="/tournaments/{{ tournament.id }}">{{ tournament.id }}{{ tournament.date_started }}</a>
+	{% endfor %}
+{% endblock %}
