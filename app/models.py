@@ -1,5 +1,7 @@
-from app import db
+from datetime import datetime
 import sqlalchemy
+
+from app import db
 
 
 class User(db.Model):
@@ -28,6 +30,10 @@ class Tournament(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date_started = db.Column(db.DateTime, nullable=False)
     random_draw = db.Column(db.Boolean, default=False, nullable=False)
+
+    def __repr__(self):
+        return 'id: {} random: {} date: {}'.format(self.id, self.random_draw,
+                                                   datetime.strftime(self.date_started, '%m/%d/%Y'))
 
 
 class Game(db.Model):
