@@ -5,6 +5,7 @@ import flask
 from flask_login import login_required
 
 from app import app, db
+from app.libs.tournament_lib import make_tournament
 from app.models import Tournament
 
 
@@ -41,11 +42,8 @@ def add_tournament_post():
 
     data = flask.request.json
 
-    added_tournament = Tournament(
-        date_started=datetime.strptime(data['date_started'], '%m/%d/%Y'),
-        random_draw=data['random_draw'],
-    )
-    session.add(added_tournament)
+    added_tournament = make_tournament(session, datetime.strptime(data['date_started'], '%m/%d/%Y'),
+                                       data['random_draw'], [])
 
     session.commit()
     return flask.Response(json.dumps({
