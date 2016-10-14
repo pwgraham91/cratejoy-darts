@@ -4,6 +4,6 @@
 	<a href="/tournaments/add">Add Tournament</a>
 	<h2>Existing Tournaments</h2>
 	{% for tournament in tournaments %}
-		<a href="/tournaments/{{ tournament.id }}">{{ tournament.id }}{{ tournament.date_started }}</a>
+		<a href="/tournaments/{{ tournament.id }}">{{ tournament }}</a>
 	{% endfor %}
 {% endblock %}

@@ -1,3 +1,4 @@
+from datetime import datetime
 import json
 
 import flask
@@ -40,10 +41,8 @@ def add_tournament_post():
 
     data = flask.request.json
 
-    # todo format date coming in to save
-
     added_tournament = Tournament(
-        date_started=data['date_started'],
+        date_started=datetime.strptime(data['date_started'], '%m/%d/%Y'),
         random_draw=data['random_draw'],
     )
     session.add(added_tournament)
