@@ -21,6 +21,15 @@
 				<option value="true">True</option>
 			</select>
 		</div>
+		<div class="form-block">
+			<h2>Players</h2>
+			{% for player in players %}
+				<label class="player-select">
+					<input type="checkbox" name="players" value="{{ player.id }}">
+					{{ player.name }}
+				</label>
+			{% endfor %}
+		</div>
 		<button id="submit-tournament" class="btn btn-default">Submit Tournament</button>
 	</div>
 {% endblock %}

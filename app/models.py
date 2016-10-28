@@ -36,6 +36,18 @@ class Tournament(db.Model):
                                                    datetime.strftime(self.date_started, '%m/%d/%Y'))
 
 
+class TournamentPlayer(db.Model):
+    """ through table to add players to tournament """
+    id = db.Column(db.Integer, primary_key=True)
+    seed = db.Column(db.SmallInteger)  # starts at 0
+
+    tournament_id = db.Column(db.Integer, db.ForeignKey('tournament.id', ondelete="CASCADE"), nullable=False)
+    user_id = db.Column(db.BigInteger, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
+
+    tournament = db.relationship("Tournament", backref="tournament_players")
+    user = db.relationship("User", backref="tournament_players")
+
+
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     forfeit = db.Column(db.Boolean, default=False, nullable=False)

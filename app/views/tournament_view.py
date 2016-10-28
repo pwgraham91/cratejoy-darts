@@ -5,7 +5,8 @@ import flask
 from flask_login import login_required
 
 from app import app, db
-from app.models import Tournament
+from app.libs.tournament_lib import make_tournament
+from app.models import Tournament, User
 
 
 @app.route('/tournaments', methods=['GET'])
@@ -15,13 +16,6 @@ def tournaments():
     return flask.render_template('tournaments/tournaments.html',
                                  user=flask.g.user,
                                  tournaments=all_tournaments)
-
-
-@app.route('/tournaments/add', methods=['GET'])
-@login_required
-def add_tournament_get():
-    return flask.render_template('tournaments/add_tournament.html',
-                                 user=flask.g.user)
 
 
 @app.route('/tournaments/<int:tournament_id>', methods=['GET'])
@@ -34,6 +28,16 @@ def tournament_get(tournament_id):
                                  tournament=queried_tournament)
 
 
+@app.route('/tournaments/add', methods=['GET'])
+@login_required
+def add_tournament_get():
+    session = db.session
+    players = session.query(User).all()
+    return flask.render_template('tournaments/add_tournament.html',
+                                 user=flask.g.user,
+                                 players=players)
+
+
 @app.route('/tournaments/add', methods=['POST'])
 @login_required
 def add_tournament_post():
@@ -41,11 +45,8 @@ def add_tournament_post():
 
     data = flask.request.json
 
-    added_tournament = Tournament(
-        date_started=datetime.strptime(data['date_started'], '%m/%d/%Y'),
-        random_draw=data['random_draw'],
-    )
-    session.add(added_tournament)
+    added_tournament = make_tournament(session, datetime.strptime(data['date_started'], '%m/%d/%Y'),
+                                       data['random_draw'], data['player_ids'])
 
     session.commit()
     return flask.Response(json.dumps({
