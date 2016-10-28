@@ -39,7 +39,7 @@ class Tournament(db.Model):
 class TournamentPlayer(db.Model):
     """ through table to add players to tournament """
     id = db.Column(db.Integer, primary_key=True)
-    seed = db.Column(db.SmallInteger)
+    seed = db.Column(db.SmallInteger)  # starts at 0
 
     tournament_id = db.Column(db.Integer, db.ForeignKey('tournament.id', ondelete="CASCADE"), nullable=False)
     user_id = db.Column(db.BigInteger, db.ForeignKey('user.id', ondelete="CASCADE"), nullable=False)
