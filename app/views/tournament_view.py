@@ -6,7 +6,8 @@ from flask_login import login_required
 
 from app import app, db
 from app.libs.tournament_lib import make_tournament
-from app.models import Tournament, User
+from app.models import Tournament, User, Game
+from app.views.handlers import game_handler
 
 
 @app.route('/tournaments', methods=['GET'])
@@ -22,10 +23,21 @@ def tournaments():
 @login_required
 def tournament_get(tournament_id):
     session = db.session
-    queried_tournament = session.query(Tournament).get(tournament_id)
+    tournament_games = session.query(Game).filter(
+        Game.tournament_id == int(tournament_id)
+    ).order_by(
+        Game.round.desc(),
+        Game.position.asc()
+    ).all()
+
+    if len(tournament_games) > 0:
+        games_by_round = game_handler.get_games_by_round(tournament_games)
+    else:
+        return 'no games in this tournament'
+
     return flask.render_template('tournaments/tournament.html',
                                  user=flask.g.user,
-                                 tournament=queried_tournament)
+                                 games_by_round=json.dumps(games_by_round))
 
 
 @app.route('/tournaments/add', methods=['GET'])
