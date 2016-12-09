@@ -3,9 +3,9 @@
 	{% if g.user.is_authenticated %}
     	<h1>Hi, {{ user.name }}!</h1>
 		{% if g.user.admin %}
-{#			<p><a href="{{ url_for('/add/user') }}">Add a Player</a></p>#}
-{#			<p><a href="{{ url_for('/add/tournament') }}">Add a Tournament</a></p>#}
-{#			<p><a href="{{ url_for('/add/game') }}">Add a Game</a></p>#}
+			<p><a href="{{ url_for('/add/user') }}">Add a Player</a></p>
+			<p><a href="{{ url_for('/add/tournament') }}">Add a Tournament</a></p>
+			<p><a href="{{ url_for('/add/game') }}">Add a Game</a></p>
 		{% endif %}
 	{% endif %}
 {% endblock %}

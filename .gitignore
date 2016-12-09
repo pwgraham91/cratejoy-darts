@@ -3,5 +3,6 @@ config.py
 tmp/
 */.DS_Store
 app/static/.DS_Store
+app/static/bower_components
 *.pyc
 *.css
