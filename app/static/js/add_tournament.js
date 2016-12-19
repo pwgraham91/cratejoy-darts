@@ -17,7 +17,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type: "POST",
-			url: '/tournaments/add',
+			url: '/tournaments/ch/add',
 			data: JSON.stringify({
 				date_started: dateStarted,
 				random_draw: randomDraw,
