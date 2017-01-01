@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block head %}
-	<link rel="stylesheet" href="/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css"/>
+	<link rel="stylesheet" href="/static/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"/>
 
 	<script>
 		require(["/static/js/add_tournament.js"]);
@@ -26,7 +26,7 @@
 			<h2>Players</h2>
 			{% for player in players %}
 				<label class="player-select">
-					<input type="checkbox" name="players" value="{{ player.id }}">
+					<input type="checkbox" name="players" value="{{ player.id }}" {% if player.auto_sign_up %}checked{% endif %}>
 					{{ player.name }}
 				</label>
 			{% endfor %}
