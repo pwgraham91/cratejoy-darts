@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block head %}
-	{# this source code has been edited #}
-	<script type="text/javascript" src="/static/js/imports/jQuery-brackets/js/brackets.js"></script>
-	<script type="text/javascript" src="/static/js/tournament.js"></script>
 	<script>
 		window.gamesByRound = {{ games_by_round | safe }};
+
+		require(["/static/js/tournament.js"]);
 	</script>
 {% endblock %}
 {% block content %}
