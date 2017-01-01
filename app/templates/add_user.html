@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% block head %}
-	<script type="text/javascript" src="/static/js/add_user.js"></script>
+	<script>
+		require(['/static/js/add_user.js']);
+	</script>
 {% endblock %}
 
 {% block content %}

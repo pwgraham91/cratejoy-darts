@@ -1,9 +1,18 @@
 console.log('loaded add_tournament.js');
 
-$(document).ready(function() {
+define([
+	'jQuery',
+	'bootstrap',
+	'bootstrapDatepicker'
+], function(
+	jquery,
+	bootstrap,
+    bootstrapDatepicker
+) {
 	var $datePicker = $('#date-started');
 	$datePicker.datepicker({
-		format: "mm/dd/yyyy"
+		format: "mm/dd/yyyy",
+		autoclose: true
 	});
 
 	$('#submit-tournament').click(function () {
