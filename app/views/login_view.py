@@ -26,6 +26,10 @@ def dev_login(user_id):
         login_user(db.session.query(User).get(user_id))
     return redirect(url_for('index'))
 
+@app.route('/login')
+def login():
+    return flask.redirect(flask.url_for('index'))
+
 
 @app.route('/logout')
 def logout():
@@ -46,7 +50,7 @@ def callback():
             return 'You are denied access.'
         return 'Error encountered.'
     if 'code' not in request.args and 'state' not in request.args:
-        return redirect(url_for('login'))
+        return redirect(url_for('index'))
     else:
         # Execution reaches here when user has
         # successfully authenticated our app.

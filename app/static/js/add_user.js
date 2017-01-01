@@ -1,6 +1,8 @@
 console.log('loaded add_user.js');
 
-$(document).ready(function() {
+define([
+	'jQuery'
+], function(jquery) {
 	$('#submit-user').click(function () {
 		var name = $('input[name="username"]').val();
 		var email = $('input[name="email"]').val();
@@ -13,7 +15,7 @@ $(document).ready(function() {
 				email: email
 			}),
 			success: function (data) {
-				window.href = '/user/' + data.id;
+				window.location.href = '/user/' + data.id;
 			},
 			error: function (data) {
 				console.log(data)
