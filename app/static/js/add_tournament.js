@@ -3,11 +3,13 @@ console.log('loaded add_tournament.js');
 define([
 	'jQuery',
 	'bootstrap',
-	'bootstrapDatepicker'
+	'bootstrapDatepicker',
+	'underscore'
 ], function(
 	jquery,
 	bootstrap,
-    bootstrapDatepicker
+    bootstrapDatepicker,
+    _
 ) {
 	var $datePicker = $('#date-started');
 	$datePicker.datepicker({

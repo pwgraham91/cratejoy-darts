@@ -7,6 +7,11 @@
 `pip install -r requirements`
 #### Install javascript requirements
 `bower install`
+`npm install`
+#### compile react files
+cd to reactDarts
+npm install
+./node_modules/.bin/webpack -d
 
 ### Setup database
 Make sure your local database is running and open it with

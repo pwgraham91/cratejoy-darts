@@ -20,6 +20,8 @@
     "underscore": "^1.8.3",
     "bootstrap": "^3.3.7",
     "bootstrap-datepicker": "^1.6.4",
-    "requirejs": "^2.3.2"
+    "requirejs": "^2.3.2",
+    "react": "^15.4.1",
+    "babel-standalone": "^6.19.0"
   }
 }

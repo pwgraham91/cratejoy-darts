@@ -1,13 +1,11 @@
 {% extends "base.html" %}
-{% block head %}
-	<script>
-		window.gamesByRound = {{ games_by_round | safe }};
 
-		require(["/static/js/tournament.js"]);
-	</script>
+{% block base_require %}
 {% endblock %}
 {% block content %}
 	<h1>Tournament</h1>
-	<div class="brackets">
+	<div id="brackets">
 	</div>
+
+	<script type="text/javascript" src="/static/js/reactDarts/src/client/public/bundle.js"></script>
 {% endblock %}

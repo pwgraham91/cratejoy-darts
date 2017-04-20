@@ -10,7 +10,9 @@
 		<link href="/static/css/base.css" rel="stylesheet">
 
 		{# js #}
-		<script type="text/javascript" src="/static/bower_components/requirejs/require.js" data-main="/static/js/base_main.js"></script>
+		{% block base_require %}
+			<script type="text/javascript" src="/static/bower_components/requirejs/require.js" data-main="/static/js/base_main.js"></script>
+		{% endblock %}
 		{% block head %}{% endblock %}
 	</head>
 
