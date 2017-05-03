@@ -1,20 +1,23 @@
 def get_game_dict(game):
     game_dict = {
-        'gameID': game.id,
-        'player1': game_player_dict(game, True),
-        'player2': game_player_dict(game, False),
+        'game_id': game.id,
+        'player_1': game_player_dict(game, True),
+        'player_2': game_player_dict(game, False),
+        'winner_id': game.winner_id,
+        'loser_id': game.loser_id,
+        'position': game.position
     }
     return game_dict
 
 
 def get_future_game_dict():
     fake_future_game = {
-        'gameID': 'future',
-        'player1': {
+        'game_id': 'future',
+        'player_1': {
             'name': '',
             'id': 'future player 1'
         },
-        'player2': {
+        'player_2': {
             'name': '',
             'id': 'future player 2'
         }
@@ -34,6 +37,7 @@ def game_player_dict(game, player_1):
     player_dict = {
         'name': player.name if player else 'BYE',
         'id': player.id if player else 'BYE',
+        'BYE': player is not None,
     }
 
     if player and game.winner_id == player.id:

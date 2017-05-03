@@ -3,9 +3,13 @@
 {% block base_require %}
 {% endblock %}
 {% block content %}
-	<h1>Tournament</h1>
 	<div id="brackets">
 	</div>
 
+	<script type="application/javascript">
+		window.tournament = {{ tournament | safe }};
+		window.gamesByRound = {{ games_by_round | safe }};
+	</script>
 	<script type="text/javascript" src="/static/js/reactDarts/src/client/public/bundle.js"></script>
+
 {% endblock %}

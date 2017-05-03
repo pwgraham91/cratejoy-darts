@@ -1,3 +1,4 @@
+import json
 from datetime import datetime
 import sqlalchemy
 
@@ -50,6 +51,22 @@ class Tournament(db.Model):
     def __repr__(self):
         return 'id: {} random: {} date: {}'.format(self.id, self.random_draw,
                                                    datetime.strftime(self.date_started, '%m/%d/%Y'))
+
+    @property
+    def dict(self):
+        return {
+            'id': self.id,
+            'date_started': self.date_started,
+            'random_draw': self.random_draw,
+        }
+
+    @property
+    def json_dict(self):
+        return json.dumps({
+            'id': self.id,
+            'date_started': datetime.strftime(self.date_started, '%m/%d/%Y'),
+            'random_draw': self.random_draw,
+        })
 
 
 class TournamentPlayer(db.Model):

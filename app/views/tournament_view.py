@@ -23,6 +23,9 @@ def tournaments():
 @login_required
 def tournament_get(tournament_id):
     session = db.session
+    tournament = session.query(Tournament).get(tournament_id)
+    if not tournament:
+        return flask.abort(404)
     tournament_games = session.query(Game).filter(
         Game.tournament_id == int(tournament_id)
     ).order_by(
@@ -37,6 +40,7 @@ def tournament_get(tournament_id):
 
     return flask.render_template('tournaments/tournament.html',
                                  user=flask.g.user,
+                                 tournament=tournament.json_dict,
                                  games_by_round=json.dumps(games_by_round))
 
 

@@ -5,6 +5,7 @@ tmp/
 app/static/.DS_Store
 app/static/bower_components
 *.pyc
-*.css
+/app/static/css/*.css
 node_modules
 app/static/js/react_js/reactDarts/node_modules
+app/static/js/reactDarts/npm-debug.log

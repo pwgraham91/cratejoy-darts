@@ -19,9 +19,17 @@ var config = {
 			},
 			{ test: /\.css$/, loader: "style-loader!css-loader" },
 			{
-        test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
-        loader: 'url-loader'
-    }
+				test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
+				loader: 'url-loader'
+			},
+			{
+				test: /\.jsx?$/,
+				exclude: /node_modules/,
+				loader: 'babel',
+				query: {
+					presets : ['es2015', 'react']
+				}
+			}
 		]
 	},
 	resolveLoader: {
